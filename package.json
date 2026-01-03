@@ -1,7 +1,7 @@
 {
   "name": "trpc-monitoring-middleware",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A tRPC middleware for monitoring procedures",
   "author": "Alexis Tacnet <alexistacnet@gmail.com>",
   "license": "MIT",

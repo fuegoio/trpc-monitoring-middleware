@@ -108,7 +108,12 @@ export function createMonitoringMiddleware(
         span.setAttributes(meta);
 
         try {
-          procedureLogger?.debug({ ...opts }, "[trpc] Starting procedure");
+          procedureLogger?.debug(
+            {
+              ctx: opts.ctx,
+            },
+            "[trpc] Starting procedure",
+          );
 
           const procedure = await opts.next({
             ctx: {
@@ -120,7 +125,6 @@ export function createMonitoringMiddleware(
 
           procedureLogger?.debug(
             {
-              ...opts,
               ok: procedure.ok,
               duration: performance.now() - start,
             },
