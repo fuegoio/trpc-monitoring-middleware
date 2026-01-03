@@ -1,5 +1,8 @@
 # tRPC monitoring middleware
 
+[![npm version](https://img.shields.io/npm/v/trpc-monitoring-middleware.svg)](https://www.npmjs.com/package/trpc-monitoring-middleware)
+[![license](https://img.shields.io/npm/l/trpc-monitoring-middleware.svg)](https://github.com/fuegoio/trpc-monitoring-middleware/blob/main/LICENSE)
+
 A simple tRPC middleware for monitoring and logging procedures.
 
 ## Features
