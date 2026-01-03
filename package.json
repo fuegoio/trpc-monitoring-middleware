@@ -1,0 +1,42 @@
+{
+  "name": "trpc-monitoring-middleware",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A tRPC middleware for monitoring procedures",
+  "author": "Alexis Tacnet <alexistacnet@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/fuegoio/trpc-monitoring-middleware#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuegoio/trpc-monitoring-middleware.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fuegoio/trpc-monitoring-middleware/issues"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "bumpp": "^10.3.2",
+    "tsdown": "^0.18.1",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": "*",
+    "@trpc/server": "^11.0.0"
+  }
+}
