@@ -13,6 +13,7 @@ const INTERNAL_ERRORS = new Set([
 // Types
 interface MonitoringMiddlewareCompatibleLogger {
   error: (error: Record<string, unknown>, message: string) => void;
+  debug: (data: Record<string, unknown>, message: string) => void;
   child: (
     data: Record<string, unknown>,
   ) => MonitoringMiddlewareCompatibleLogger;
@@ -107,6 +108,8 @@ export function createMonitoringMiddleware(
         span.setAttributes(meta);
 
         try {
+          procedureLogger?.debug({ ...opts }, "[trpc] Starting procedure");
+
           const procedure = await opts.next({
             ctx: {
               logger: procedureLogger,
@@ -114,6 +117,15 @@ export function createMonitoringMiddleware(
           });
 
           handleProcedureCompletion(span, procedure, meta, procedureLogger);
+
+          procedureLogger?.debug(
+            {
+              ...opts,
+              ok: procedure.ok,
+              duration: performance.now() - start,
+            },
+            "[trpc] Completed procedure",
+          );
           return procedure;
         } catch (error) {
           handleUnexpectedError(

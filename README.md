@@ -64,6 +64,13 @@ Error codes classified as internal errors:
 - `SERVICE_UNAVAILABLE`
 - `GATEWAY_TIMEOUT`
 
+### Debug Logging
+
+The middleware automatically logs all tRPC procedure executions in `DEBUG` level with detailed information:
+
+- **Start events**: Logged when a procedure starts execution with path and type
+- **Completion events**: Logged when a procedure completes successfully with duration
+
 ## Configuration
 
 ```typescript
@@ -79,11 +86,18 @@ const monitoringMiddleware = createMonitoringMiddleware({
       // Custom error logging
       console.error(message, errorData);
     },
+    debug: (data, message) => {
+      // Custom debug logging
+      console.log(message, data);
+    },
     child: (data) => {
       // Return a new logger instance with additional context
       return {
         error: (errorData, message) => {
           console.error(message, { ...data, ...errorData });
+        },
+        debug: (debugData, message) => {
+          console.log(message, { ...data, ...debugData });
         },
         child: (additionalData) => {
           return this.child({ ...data, ...additionalData });
